@@ -8,6 +8,16 @@ public class Person {
     private String name;
     private LocalDate birthday;
     private int age;
+    public int id;
+    public static int count = 0;
+
+    public int getId() {
+
+        return id;
+    }
+
+   // static int count = 0;
+
 
     public String getName() {
 
@@ -30,6 +40,7 @@ public class Person {
         this.birthday = birthday;
         age = Years.yearsBetween(this.birthday, new LocalDate()).getYears();
         this.age = age;
+        id = ++count;
     }
 }
 

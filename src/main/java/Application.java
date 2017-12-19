@@ -7,6 +7,7 @@ import org.joda.time.LocalDate;
 import sorters.BubbleSorter;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Properties;
 
@@ -16,7 +17,7 @@ public class Application {
     static Properties prop = new Properties();
     static OutputStream output = null;
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException {
 
         logger.trace("Entering application");
 
@@ -42,20 +43,40 @@ public class Application {
         carRepo.add(car2);
 
         PersonRepo<Person> personRepo = new PersonRepo(new Person[1],0);
-        personRepo.add(person2);
         personRepo.add(person1);
+        personRepo.add(person2);
         personRepo.add(person3);
+
+        String test10 = personRepo.getRep()[0].getName();
+        String test11 = personRepo.getRep()[1].getName();
+        String test12 = personRepo.getRep()[2].getName();
+        System.out.println(test10);
+        System.out.println(test11);
+        System.out.println(test12);
 
         carRepo.sort(new BubbleSorter(), new CarBoughtComparator());
 
-        String test7 = carRepo.getRep()[0].getMark();
-        String test8 = carRepo.getRep()[1].getMark();
-        String test9 = carRepo.getRep()[2].getMark();
+//        String test7 = carRepo.getRep()[0].getMark();
+//        String test8 = carRepo.getRep()[1].getMark();
+//        String test9 = carRepo.getRep()[2].getMark();
+//
+//        System.out.println(test7);
+//        System.out.println(test8);
+//        System.out.println(test9);
 
-        System.out.println(test7);
-        System.out.println(test8);
-        System.out.println(test9);
+        //personRepo.find(2);
 
-        personRepo.findPerson(new checkers.PersonNameChecker(), prop.getProperty("Name"));
+        Configurator configurator = new Configurator();
+        String Name = configurator.getPropValues();
+        //personRepo.findPerson(new checkers.PersonNameChecker(), Name);
+        personRepo.delete(1);
+
+        String test13 = personRepo.getRep()[0].getName();
+        String test14 = personRepo.getRep()[1].getName();
+        //String test15 = personRepo.getRep()[2].getName();
+        System.out.println(test13);
+        System.out.println(test14);
+        //System.out.println(test15);
+
     }
 }
